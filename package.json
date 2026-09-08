@@ -4,8 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node -e \"fs.copyFileSync('index.source.html', 'index.html')\"",
     "dev": "vite",
-    "build": "vite build && node -e \"fs.cpSync('dist', 'docs', {recursive: true})\"",
+    "prebuild": "node -e \"fs.copyFileSync('index.source.html', 'index.html')\"",
+    "build": "vite build && node -e \"fs.cpSync('dist', 'docs', {recursive: true}); fs.cpSync('dist', '.', {recursive: true})\"",
     "preview": "vite preview"
   },
   "dependencies": {
