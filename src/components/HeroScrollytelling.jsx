@@ -14,7 +14,7 @@ export default function HeroScrollytelling({ onSelectService, onOpenContact }) {
   const currentProgressRef = useRef(0);
   const animFrameIdRef = useRef(null);
 
-  // Handle Scroll Progress
+  // Handle Scroll Progress (driven by user scrolling)
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
@@ -22,57 +22,87 @@ export default function HeroScrollytelling({ onSelectService, onOpenContact }) {
       const totalScrollable = rect.height - window.innerHeight;
       if (totalScrollable <= 0) return;
 
-      const progress = Math.min(Math.max(-rect.top / totalScrollable, 0), 1);
-      targetProgressRef.current = progress;
-      setScrollProgress(progress);
+      // If user scrolls past the hero section, ensure video mode stops immediately
+      if (rect.bottom <= window.innerHeight || -rect.top >= totalScrollable) {
+        if (isPlayingVideo) {
+          setIsPlayingVideo(false);
+        }
+      }
 
-      // Map progress to chapter index (0, 1, 2, 3)
-      if (progress < 0.25) {
-        setActiveChapterIndex(0);
-      } else if (progress < 0.5) {
-        setActiveChapterIndex(1);
-      } else if (progress < 0.75) {
-        setActiveChapterIndex(2);
-      } else {
-        setActiveChapterIndex(3);
+      // If video mode is not running, calculate progress from scroll
+      if (!isPlayingVideo) {
+        const progress = Math.min(Math.max(-rect.top / totalScrollable, 0), 1);
+        targetProgressRef.current = progress;
+        setScrollProgress(progress);
+
+        // Map progress to chapter index (0, 1, 2, 3)
+        if (progress < 0.25) {
+          setActiveChapterIndex(0);
+        } else if (progress < 0.5) {
+          setActiveChapterIndex(1);
+        } else if (progress < 0.75) {
+          setActiveChapterIndex(2);
+        } else {
+          setActiveChapterIndex(3);
+        }
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isPlayingVideo]);
 
-  // Auto-play Video Mode with Continuous Infinite Looping
+  // Immediately pause video mode if the user manually scrolls or touches the viewport
+  useEffect(() => {
+    if (!isPlayingVideo) return;
+
+    const handleUserScroll = () => {
+      setIsPlayingVideo(false);
+    };
+
+    window.addEventListener('wheel', handleUserScroll, { passive: true });
+    window.addEventListener('touchmove', handleUserScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('wheel', handleUserScroll);
+      window.removeEventListener('touchmove', handleUserScroll);
+    };
+  }, [isPlayingVideo]);
+
+  // Auto-play Video Mode (Virtual 60 FPS animation that loops seamlessly without locking or hijacking browser scroll)
   useEffect(() => {
     let animId;
-    let isPausedForLoop = false;
-    let loopTimeout = null;
 
     if (isPlayingVideo) {
       const step = () => {
-        if (!containerRef.current) return;
-        const rect = containerRef.current.getBoundingClientRect();
-        const totalScrollable = rect.height - window.innerHeight;
-        const startTop = containerRef.current.offsetTop;
-        const maxScroll = startTop + totalScrollable;
-        const currentScroll = window.scrollY;
-
-        // When reaching 100% (end of Chapter 04), pause briefly and loop back to start without getting stuck
-        if (currentScroll >= maxScroll - 6) {
-          if (!isPausedForLoop) {
-            isPausedForLoop = true;
-            loopTimeout = setTimeout(() => {
-              if (containerRef.current) {
-                window.scrollTo({ top: startTop, behavior: 'instant' });
-                setTimeout(() => {
-                  isPausedForLoop = false;
-                }, 60);
-              }
-            }, 800);
+        // If hero section has been scrolled out of view, automatically pause video
+        if (containerRef.current) {
+          const rect = containerRef.current.getBoundingClientRect();
+          if (rect.bottom < 50 || rect.top > window.innerHeight) {
+            setIsPlayingVideo(false);
+            return;
           }
-        } else if (!isPausedForLoop) {
-          window.scrollBy(0, 3.5);
+        }
+
+        // Advance virtual video progress smoothly
+        let next = targetProgressRef.current + 0.0018;
+        if (next >= 1.0) {
+          next = 0; // seamless continuous loop back to Chapter 1
+          currentProgressRef.current = 0;
+        }
+        targetProgressRef.current = next;
+        setScrollProgress(next);
+
+        // Update active chapter in lockstep with virtual video progress
+        if (next < 0.25) {
+          setActiveChapterIndex(0);
+        } else if (next < 0.5) {
+          setActiveChapterIndex(1);
+        } else if (next < 0.75) {
+          setActiveChapterIndex(2);
+        } else {
+          setActiveChapterIndex(3);
         }
 
         animId = requestAnimationFrame(step);
@@ -83,7 +113,6 @@ export default function HeroScrollytelling({ onSelectService, onOpenContact }) {
 
     return () => {
       if (animId) cancelAnimationFrame(animId);
-      if (loopTimeout) clearTimeout(loopTimeout);
     };
   }, [isPlayingVideo]);
 
@@ -91,11 +120,8 @@ export default function HeroScrollytelling({ onSelectService, onOpenContact }) {
     if (!isPlayingVideo) {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
-        const totalScrollable = rect.height - window.innerHeight;
-        const startTop = containerRef.current.offsetTop;
-        const maxScroll = startTop + totalScrollable;
-        if (window.scrollY >= maxScroll - 15 || window.scrollY < startTop) {
-          window.scrollTo({ top: startTop, behavior: 'instant' });
+        if (rect.bottom < 100 || rect.top > window.innerHeight) {
+          window.scrollTo({ top: containerRef.current.offsetTop, behavior: 'smooth' });
         }
       }
       setIsPlayingVideo(true);
@@ -106,6 +132,9 @@ export default function HeroScrollytelling({ onSelectService, onOpenContact }) {
 
   // Jump directly to chapter
   const jumpToChapter = (index) => {
+    if (isPlayingVideo) {
+      setIsPlayingVideo(false);
+    }
     if (!containerRef.current) return;
     const totalScrollable = containerRef.current.clientHeight - window.innerHeight;
     const targetScroll = containerRef.current.offsetTop + (index / 3.2) * totalScrollable;
