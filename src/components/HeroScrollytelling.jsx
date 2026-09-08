@@ -419,7 +419,7 @@ export default function HeroScrollytelling({ onSelectService, onOpenContact }) {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-slate-400">
                 {currentChapter.title.split(' ').slice(0, 2).join(' ')}{' '}
               </span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400 font-extrabold underline decoration-cyan-500/30 decoration-wavy">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400 font-extrabold">
                 {currentChapter.title.split(' ').slice(2).join(' ')}
               </span>
             </h1>

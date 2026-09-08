@@ -204,7 +204,7 @@ export default function ContactSection({ preselectedService, prefilledScope }) {
                     Thank You, {formData.fullName}!
                   </h3>
                   <p className="text-slate-300 text-sm max-w-md mx-auto leading-relaxed">
-                    Your inquiry regarding <span className="text-cyan-300 font-semibold">{formData.service}</span> has been assigned to our Lead Solutions Architect. We will reach out to <span className="text-cyan-300 underline">{formData.email}</span> within 2 hours.
+                    Your inquiry regarding <span className="text-cyan-300 font-semibold">{formData.service}</span> has been assigned to our Lead Solutions Architect. We will reach out to <span className="text-cyan-300 font-semibold">{formData.email}</span> within 2 hours.
                   </p>
                 </div>
 
