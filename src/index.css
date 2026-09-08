@@ -9,7 +9,8 @@
 body {
   background-color: #030712;
   color: #f8fafc;
-  overflow-x: hidden;
+  overflow-x: clip;
+  -webkit-overflow-scrolling: touch;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 

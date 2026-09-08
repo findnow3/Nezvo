@@ -351,10 +351,10 @@ export default function HeroScrollytelling({ onSelectService, onOpenContact }) {
     <section
       id="hero"
       ref={containerRef}
-      className="relative w-full h-[380vh] bg-[#030712] text-white"
+      className="relative w-full h-[220vh] sm:h-[380vh] bg-[#030712] text-white"
     >
       {/* Sticky Cinematic Viewport */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between">
+      <div className="sticky top-0 h-screen h-[100dvh] w-full overflow-hidden flex flex-col justify-between">
         {/* Interactive 3D Canvas Background (Video-like 60fps scrub) */}
         <canvas
           ref={canvasRef}
@@ -364,17 +364,17 @@ export default function HeroScrollytelling({ onSelectService, onOpenContact }) {
         {/* Ambient Grid overlay */}
         <div className="absolute inset-0 bg-cyber-grid pointer-events-none opacity-25 z-0" />
         <div className="absolute inset-0 scanline pointer-events-none opacity-20 z-0" />
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#030712] to-transparent pointer-events-none z-10" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#030712] via-[#030712]/70 to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-x-0 top-0 h-28 sm:h-32 bg-gradient-to-b from-[#030712] to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-x-0 bottom-0 h-32 sm:h-40 bg-gradient-to-t from-[#030712] via-[#030712]/70 to-transparent pointer-events-none z-10" />
 
         {/* Top Controls Bar */}
-        <div className="relative z-20 pt-20 px-6 sm:px-12 flex items-center justify-end pointer-events-auto">
+        <div className="relative z-20 pt-16 sm:pt-20 px-4 sm:px-12 flex items-center justify-end pointer-events-auto">
 
           {/* Video Play/Pause toggle */}
           <div className="flex items-center gap-2">
             <button
               onClick={toggleVideoMode}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 border ${
+              className={`flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 border ${
                 isPlayingVideo
                   ? 'bg-cyan-500/20 text-cyan-300 border-cyan-400 shadow-neon-cyan'
                   : 'bg-[#080e1e]/70 text-slate-300 border-white/10 hover:border-cyan-400/40'
@@ -397,16 +397,16 @@ export default function HeroScrollytelling({ onSelectService, onOpenContact }) {
         </div>
 
         {/* Center: Dynamic Transforming Hero Narrative Content */}
-        <div className="relative z-20 max-w-5xl mx-auto px-6 sm:px-8 my-auto w-full pointer-events-auto">
-          <div className="space-y-6 text-center">
+        <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-8 my-auto w-full pointer-events-auto">
+          <div className="space-y-3 sm:space-y-6 text-center">
             {/* Chapter Header Pill */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-cyan-950/50 border border-cyan-500/30 backdrop-blur-lg shadow-lg shadow-cyan-950/40">
-              <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
-              <span className="font-mono text-xs uppercase tracking-widest text-cyan-300 font-bold">
+            <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-cyan-950/50 border border-cyan-500/30 backdrop-blur-lg shadow-lg shadow-cyan-950/40">
+              <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-cyan-400 animate-pulse" />
+              <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-cyan-300 font-bold">
                 {currentChapter.chapter} // {currentChapter.phase}
               </span>
               <span className="w-1 h-1 rounded-full bg-cyan-400"></span>
-              <span className="text-xs text-slate-300 font-medium">
+              <span className="text-[10px] sm:text-xs text-slate-300 font-medium">
                 {currentChapter.tag}
               </span>
             </div>
@@ -414,7 +414,7 @@ export default function HeroScrollytelling({ onSelectService, onOpenContact }) {
             {/* Dynamic Headline with Smooth Transition Effect */}
             <h1
               key={currentChapter.title}
-              className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] text-white drop-shadow-2xl transition-all duration-500"
+              className="text-2xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.12] sm:leading-[1.08] text-white drop-shadow-2xl transition-all duration-500"
             >
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-slate-400">
                 {currentChapter.title.split(' ').slice(0, 2).join(' ')}{' '}
@@ -427,22 +427,22 @@ export default function HeroScrollytelling({ onSelectService, onOpenContact }) {
             {/* Subtitle */}
             <p
               key={currentChapter.subtitle}
-              className="max-w-3xl mx-auto text-base sm:text-xl text-slate-300 font-normal leading-relaxed transition-all duration-500 drop-shadow"
+              className="max-w-3xl mx-auto text-xs sm:text-base lg:text-xl text-slate-300 font-normal leading-relaxed transition-all duration-500 drop-shadow line-clamp-2 sm:line-clamp-none"
             >
               {currentChapter.subtitle}
             </p>
 
             {/* Key Metrics / Highlights Grid for Current Chapter */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-6 max-w-2xl mx-auto pt-2 pb-4">
+            <div className="grid grid-cols-3 gap-2 sm:gap-6 max-w-2xl mx-auto pt-1 sm:pt-2 pb-1 sm:pb-4">
               {currentChapter.highlights.map((h, idx) => (
                 <div
                   key={idx}
-                  className="bg-[#080e1e]/70 border border-cyan-500/20 rounded-2xl p-3 sm:p-4 backdrop-blur-md shadow-lg shadow-black/40 hover:border-cyan-400/50 transition-all duration-300"
+                  className="bg-[#080e1e]/70 border border-cyan-500/20 rounded-xl sm:rounded-2xl p-2 sm:p-4 backdrop-blur-md shadow-lg shadow-black/40 hover:border-cyan-400/50 transition-all duration-300"
                 >
-                  <div className="text-xl sm:text-3xl font-black text-cyan-300 tracking-tight font-mono">
+                  <div className="text-base sm:text-2xl lg:text-3xl font-black text-cyan-300 tracking-tight font-mono">
                     {h.value}
                   </div>
-                  <div className="text-[11px] sm:text-xs text-slate-400 font-medium mt-1">
+                  <div className="text-[10px] sm:text-xs text-slate-400 font-medium mt-0.5 sm:mt-1 truncate">
                     {h.label}
                   </div>
                 </div>
@@ -450,20 +450,20 @@ export default function HeroScrollytelling({ onSelectService, onOpenContact }) {
             </div>
 
             {/* Action CTAs */}
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+            <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 pt-1 sm:pt-2">
               <a
                 href={currentChapter.ctaTarget}
-                className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 text-white font-bold text-sm sm:text-base tracking-wide shadow-xl shadow-cyan-500/25 hover:shadow-cyan-400/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
+                className="group relative inline-flex items-center gap-2 sm:gap-3 px-5 py-2.5 sm:px-8 sm:py-4 rounded-full bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 text-white font-bold text-xs sm:text-base tracking-wide shadow-xl shadow-cyan-500/25 hover:shadow-cyan-400/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
               >
                 <span>{currentChapter.ctaText}</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </a>
 
               <button
                 onClick={() => onOpenContact()}
-                className="px-7 py-4 rounded-full bg-[#080e1e]/80 hover:bg-[#0c162e] text-slate-200 hover:text-white font-semibold text-sm sm:text-base border border-white/15 hover:border-cyan-400/40 backdrop-blur-md transition-all duration-200 flex items-center gap-2"
+                className="px-4 py-2.5 sm:px-7 sm:py-4 rounded-full bg-[#080e1e]/80 hover:bg-[#0c162e] text-slate-200 hover:text-white font-semibold text-xs sm:text-base border border-white/15 hover:border-cyan-400/40 backdrop-blur-md transition-all duration-200 flex items-center gap-1.5 sm:gap-2"
               >
-                <Zap className="w-4 h-4 text-cyan-400" />
+                <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400" />
                 <span>Talk to Nezvo Experts</span>
               </button>
             </div>
@@ -471,21 +471,21 @@ export default function HeroScrollytelling({ onSelectService, onOpenContact }) {
         </div>
 
         {/* Bottom Scrubber & Chapter Navigation Bar */}
-        <div className="relative z-20 pb-8 px-6 sm:px-12 w-full max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 pointer-events-auto">
+        <div className="relative z-20 pb-4 sm:pb-8 px-4 sm:px-12 w-full max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 pointer-events-auto">
           {/* Timeline Status */}
-          <div className="flex items-center gap-2 text-xs font-mono text-cyan-300">
+          <div className="flex items-center gap-2 text-[11px] sm:text-xs font-mono text-cyan-300">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-            <ChevronDown className="w-4 h-4 text-cyan-400 animate-bounce" />
+            <ChevronDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400 animate-bounce" />
             <span>CINEMATIC TIMELINE • {Math.round(scrollProgress * 100)}%</span>
           </div>
 
           {/* Chapter Timeline Buttons */}
-          <div className="flex items-center gap-2 bg-[#080e1e]/80 border border-white/10 rounded-full p-1.5 backdrop-blur-md shadow-xl">
+          <div className="flex items-center gap-1.5 sm:gap-2 bg-[#080e1e]/80 border border-white/10 rounded-full p-1 sm:p-1.5 backdrop-blur-md shadow-xl">
             {HERO_CHAPTERS.map((chap, idx) => (
               <button
                 key={chap.id}
                 onClick={() => jumpToChapter(idx)}
-                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono transition-all duration-300 ${
+                className={`flex items-center gap-1 sm:gap-2 px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-mono transition-all duration-300 ${
                   activeChapterIndex === idx
                     ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold shadow-md shadow-cyan-500/30'
                     : 'text-slate-400 hover:text-white hover:bg-white/5'
