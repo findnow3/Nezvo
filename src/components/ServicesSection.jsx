@@ -13,103 +13,94 @@ const ICON_MAP = {
 
 export default function ServicesSection({ onOpenServiceModal }) {
   return (
-    <section id="services" className="relative py-28 bg-[#030712] text-white overflow-hidden">
-      {/* Background Ambience */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-cyan-600/10 blur-[140px] pointer-events-none rounded-full" />
-      <div className="absolute inset-0 bg-cyber-grid opacity-15 pointer-events-none" />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="py-20 sm:py-24 bg-slate-50 border-t border-b border-slate-200/80 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/40 border border-cyan-500/20 text-cyan-300 font-mono text-xs font-semibold uppercase tracking-widest">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-            Enterprise Solutions Suite
+        <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-700 text-xs font-semibold uppercase tracking-wider">
+            <Sparkles className="w-3.5 h-3.5 text-cyan-600" />
+            Core Capabilities
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
-            6 Specialized Core Services{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400">
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900">
+            6 Specialized Services{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-sky-600 to-blue-700">
               Built For Enterprise Scale
             </span>
           </h2>
-          <p className="text-slate-400 text-base sm:text-lg leading-relaxed">
-            Click on any card below to explore deep architectural blueprints, supported tech stacks, implementation workflows, and quantifiable business outcomes.
+          <p className="text-slate-600 text-sm sm:text-base">
+            Click any service to view architectural workflows, deliverables, and technical capabilities.
           </p>
         </div>
 
         {/* 6 Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {SERVICES.map((service) => {
             const IconComponent = ICON_MAP[service.icon] || Layers;
             return (
               <div
                 key={service.id}
                 onClick={() => onOpenServiceModal(service)}
-                className="group relative cursor-pointer rounded-3xl p-7 sm:p-8 bg-[#080e1e]/80 border border-white/10 hover:border-cyan-500/40 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-950/50 flex flex-col justify-between overflow-hidden"
+                className="group cursor-pointer rounded-2xl p-6 sm:p-7 bg-white border border-slate-200/90 hover:border-cyan-500/40 shadow-sm hover:shadow-xl transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between"
               >
-                {/* Background glow on hover */}
-                <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-cyan-500/10 to-indigo-500/0 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
-
                 <div>
-                  {/* Top row: Number & Icon */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-slate-900 to-[#0c1427] border border-cyan-500/20 group-hover:border-cyan-400/50 flex items-center justify-center text-cyan-400 group-hover:text-cyan-300 group-hover:scale-110 shadow-lg transition-all duration-300">
-                      <IconComponent className="w-7 h-7" />
+                  {/* Top row: Icon & Number */}
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="w-12 h-12 rounded-xl bg-cyan-50 border border-cyan-200/60 flex items-center justify-center text-cyan-600 group-hover:bg-cyan-600 group-hover:text-white transition-colors duration-200 shadow-sm">
+                      <IconComponent className="w-6 h-6" />
                     </div>
-                    <span className="font-mono text-3xl font-black text-slate-700 group-hover:text-cyan-400/40 transition-colors">
+                    <span className="font-mono text-2xl font-black text-slate-300 group-hover:text-cyan-600/40 transition-colors">
                       {service.number}
                     </span>
                   </div>
 
                   {/* Title & Tagline */}
-                  <h3 className="text-xl font-black text-white group-hover:text-cyan-300 transition-colors mb-2 leading-snug">
+                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-cyan-700 transition-colors mb-1.5 leading-snug">
                     {service.title}
                   </h3>
-                  <p className="text-xs font-mono text-cyan-400/90 font-medium mb-4">
+                  <p className="text-xs font-semibold text-cyan-700 mb-3">
                     {service.tagline}
                   </p>
 
                   {/* Short Description */}
-                  <p className="text-sm text-slate-400 leading-relaxed mb-6">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
                     {service.shortDesc}
                   </p>
 
                   {/* Key Capabilities Preview */}
-                  <div className="space-y-2 mb-6">
+                  <div className="space-y-1.5 mb-5">
                     {service.capabilities.slice(0, 3).map((cap, idx) => (
-                      <div key={idx} className="flex items-center gap-2 text-xs text-slate-300">
-                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
+                      <div key={idx} className="flex items-center gap-2 text-xs text-slate-600">
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 shrink-0" />
                         <span className="truncate">{cap}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Bottom Row: Tech Stack Chips & Click Prompt */}
-                <div className="pt-5 border-t border-white/10 space-y-4">
-                  {/* Stack pills */}
+                {/* Bottom Row: Tech Stack & Click Trigger */}
+                <div className="pt-4 border-t border-slate-100 space-y-3">
                   <div className="flex flex-wrap gap-1.5">
                     {service.techStack.slice(0, 4).map((tech, idx) => (
                       <span
                         key={idx}
-                        className="px-2.5 py-1 rounded-md text-[10px] font-mono font-medium bg-[#040813] text-slate-300 border border-white/5"
+                        className="px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-slate-100 text-slate-700 border border-slate-200"
                       >
                         {tech}
                       </span>
                     ))}
                     {service.techStack.length > 4 && (
-                      <span className="px-2 py-1 rounded-md text-[10px] font-mono text-cyan-400 bg-cyan-950/40 border border-cyan-500/20">
-                        +{service.techStack.length - 4} more
+                      <span className="px-1.5 py-0.5 rounded text-[10px] font-mono font-medium bg-cyan-50 text-cyan-700 border border-cyan-200">
+                        +{service.techStack.length - 4}
                       </span>
                     )}
                   </div>
 
-                  {/* Click trigger action */}
-                  <div className="flex items-center justify-between text-xs font-semibold text-cyan-400 group-hover:text-cyan-300 pt-1">
-                    <span className="flex items-center gap-1.5">
-                      <span>Click to view full architecture</span>
+                  <div className="flex items-center justify-between text-xs font-semibold text-cyan-700 group-hover:text-cyan-800 pt-1">
+                    <span className="flex items-center gap-1">
+                      <span>View Specifications</span>
                       <ExternalLink className="w-3.5 h-3.5" />
                     </span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </div>
@@ -118,20 +109,20 @@ export default function ServicesSection({ onOpenServiceModal }) {
         </div>
 
         {/* Bottom Banner Callout */}
-        <div className="mt-16 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-cyan-950/40 via-[#080e1e] to-indigo-950/40 border border-cyan-500/20 flex flex-col sm:flex-row items-center justify-between gap-6 backdrop-blur-md">
-          <div className="space-y-1 text-center sm:text-left">
-            <h4 className="text-base sm:text-lg font-bold text-white">
-              Looking for a custom cross-domain architecture?
+        <div className="mt-12 p-6 sm:p-7 rounded-2xl bg-gradient-to-r from-cyan-50 via-sky-50 to-blue-50 border border-cyan-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="space-y-0.5 text-center sm:text-left">
+            <h4 className="text-sm sm:text-base font-bold text-slate-900">
+              Need a multi-disciplinary squad across Cloud, AI, and Software?
             </h4>
-            <p className="text-xs sm:text-sm text-slate-400">
-              We frequently assemble cross-functional squads combining AI, Cloud, and High-Speed Custom Backends.
+            <p className="text-xs sm:text-sm text-slate-600">
+              We frequently assemble cross-functional teams tailored directly to enterprise roadmap milestones.
             </p>
           </div>
           <a
             href="#contact"
-            className="shrink-0 px-6 py-3 rounded-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs tracking-wide transition-all shadow-lg shadow-cyan-500/20"
+            className="shrink-0 px-5 py-2.5 rounded-full bg-gradient-to-r from-cyan-600 via-sky-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold text-xs tracking-wide shadow-md shadow-cyan-600/20 transition-all"
           >
-            Request Custom Scope Analysis
+            Request Custom Scope
           </a>
         </div>
       </div>

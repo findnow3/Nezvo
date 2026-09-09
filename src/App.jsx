@@ -46,54 +46,55 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#030712] text-white flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col selection:bg-cyan-500/20 selection:text-cyan-900">
       {/* Top Navbar */}
       <Navbar
         onOpenContact={() => handleOpenContact()}
         onSelectService={handleOpenContact}
       />
 
-      {/* Hero Section with Cinematic Video-Like Canvas Scrollytelling */}
+      {/* Main Page Sections */}
       <main className="flex-1">
+        {/* Hero Section with Light-Theme Generative Canvas & Interactive Telemetry */}
         <HeroScrollytelling
           onSelectService={handleSelectServiceModal}
           onOpenContact={() => handleOpenContact()}
         />
 
-        {/* Marquee Ticker */}
+        {/* Marquee Tech Stack Ticker */}
         <TechStackMarquee />
 
-        {/* 6 Core Services with interactive card click modal */}
+        {/* 6 Core Services */}
         <ServicesSection
           onOpenServiceModal={handleSelectServiceModal}
         />
 
-        {/* 8 Pillars of Experience & Who We Are */}
+        {/* 8 Foundational Pillars of Experience */}
         <AboutSection
           onOpenContact={() => handleOpenContact()}
         />
 
-        {/* Interactive Scope & Cost Estimator */}
+        {/* Scope & Delivery Estimator */}
         <ProjectEstimator
           onApplyEstimation={handleApplyEstimation}
         />
 
-        {/* Social Proof & Testimonials */}
+        {/* Client Testimonials */}
         <TestimonialsSection />
 
-        {/* Enterprise Contact & Consultation Suite */}
+        {/* Enterprise Contact Suite */}
         <ContactSection
           preselectedService={preselectedService}
           prefilledScope={prefilledScope}
         />
       </main>
 
-      {/* Corporate Footer */}
+      {/* Footer */}
       <Footer
         onOpenContact={() => handleOpenContact()}
       />
 
-      {/* Interactive Service Detail Modal */}
+      {/* Service Detail Modal */}
       {selectedServiceModal && (
         <ServiceDetailModal
           service={selectedServiceModal}

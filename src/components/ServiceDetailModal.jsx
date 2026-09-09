@@ -16,7 +16,6 @@ export default function ServiceDetailModal({ service, onClose, onSelectForInquir
       if (e.key === 'Escape') onClose();
     };
     window.addEventListener('keydown', handleKeyDown);
-    // Prevent body scroll when modal is open
     document.body.style.overflow = 'hidden';
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
@@ -29,31 +28,29 @@ export default function ServiceDetailModal({ service, onClose, onSelectForInquir
   const IconComponent = ICON_MAP[service.icon] || Layers;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 overflow-y-auto">
-      {/* Backdrop */}
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      {/* Soft translucent backdrop */}
       <div
-        className="fixed inset-0 bg-black/80 backdrop-blur-xl transition-opacity animate-fadeIn"
+        className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       />
 
       {/* Modal Container */}
-      <div className="relative w-full max-w-4xl bg-[#080e1e] border border-cyan-500/30 rounded-3xl shadow-2xl shadow-cyan-950/60 overflow-hidden z-10 my-auto max-h-[90vh] flex flex-col">
-        {/* Glowing header bar */}
-        <div className="h-1.5 w-full bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-500" />
+      <div className="relative w-full max-w-3xl bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden z-10 my-auto max-h-[90vh] flex flex-col animate-fadeIn">
+        {/* Top Accent Gradient Line */}
+        <div className="h-1.5 w-full bg-gradient-to-r from-cyan-600 via-sky-500 to-blue-600" />
 
-        {/* Modal Top Bar */}
-        <div className="flex items-center justify-between p-6 sm:p-8 border-b border-white/10 bg-[#060b17]/80">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
-              <IconComponent className="w-6 h-6" />
+        {/* Modal Top Header */}
+        <div className="flex items-center justify-between p-5 sm:p-6 border-b border-slate-100 bg-slate-50/60">
+          <div className="flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-xl bg-cyan-100/70 border border-cyan-200 flex items-center justify-center text-cyan-700">
+              <IconComponent className="w-5 h-5" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-xs text-cyan-400 font-bold uppercase tracking-wider">
-                  SERVICE SPECIFICATION // {service.number}
-                </span>
-              </div>
-              <h2 className="text-xl sm:text-2xl font-black text-white">
+              <span className="font-mono text-[10px] text-cyan-700 font-bold uppercase tracking-wider block">
+                SERVICE SPECIFICATION // {service.number}
+              </span>
+              <h2 className="text-lg sm:text-xl font-bold text-slate-900">
                 {service.title}
               </h2>
             </div>
@@ -61,39 +58,39 @@ export default function ServiceDetailModal({ service, onClose, onSelectForInquir
 
           <button
             onClick={onClose}
-            className="p-2 rounded-full bg-slate-900/80 hover:bg-slate-800 text-slate-400 hover:text-white border border-white/10 transition-colors"
-            aria-label="Close details"
+            className="p-2 rounded-full bg-white hover:bg-slate-100 text-slate-400 hover:text-slate-700 border border-slate-200 transition-colors shadow-sm"
+            aria-label="Close"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Scrollable Content Body */}
-        <div className="p-6 sm:p-8 space-y-8 overflow-y-auto custom-scrollbar">
-          {/* Tagline & Full Overview */}
-          <div className="space-y-3">
-            <p className="text-lg font-medium text-cyan-300">
+        <div className="p-5 sm:p-6 space-y-6 overflow-y-auto custom-scrollbar">
+          {/* Tagline & Overview */}
+          <div className="space-y-2">
+            <p className="text-sm sm:text-base font-semibold text-cyan-800">
               {service.tagline}
             </p>
-            <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
               {service.fullOverview}
             </p>
           </div>
 
-          {/* Key Capabilities */}
+          {/* Core Capabilities */}
           <div>
-            <h3 className="text-sm font-mono uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-cyan-400" />
-              Core Capabilities & Scope
+            <h3 className="text-xs font-mono uppercase tracking-wider text-slate-500 mb-3 font-bold flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-cyan-600" />
+              Core Capabilities
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {service.capabilities.map((cap, idx) => (
                 <div
                   key={idx}
-                  className="flex items-start gap-3 p-3.5 rounded-xl bg-[#040813] border border-white/5 hover:border-cyan-500/20 transition-colors"
+                  className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200/80"
                 >
-                  <CheckCircle2 className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
-                  <span className="text-xs sm:text-sm text-slate-200 font-medium leading-snug">
+                  <CheckCircle2 className="w-4 h-4 text-cyan-600 shrink-0 mt-0.5" />
+                  <span className="text-xs text-slate-700 font-medium leading-snug">
                     {cap}
                   </span>
                 </div>
@@ -101,17 +98,17 @@ export default function ServiceDetailModal({ service, onClose, onSelectForInquir
             </div>
           </div>
 
-          {/* Technology Stack Badges */}
+          {/* Tech Stack Chips */}
           <div>
-            <h3 className="text-sm font-mono uppercase tracking-widest text-slate-400 mb-3 flex items-center gap-2">
-              <Terminal className="w-4 h-4 text-cyan-400" />
-              Supported Tech Stack & Tools
+            <h3 className="text-xs font-mono uppercase tracking-wider text-slate-500 mb-2.5 font-bold flex items-center gap-1.5">
+              <Terminal className="w-3.5 h-3.5 text-cyan-600" />
+              Primary Stack
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5">
               {service.techStack.map((tech, idx) => (
                 <span
                   key={idx}
-                  className="px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-cyan-950/40 text-cyan-200 border border-cyan-500/20"
+                  className="px-2.5 py-1 rounded-md text-xs font-mono font-medium bg-cyan-50 text-cyan-800 border border-cyan-200"
                 >
                   {tech}
                 </span>
@@ -119,25 +116,22 @@ export default function ServiceDetailModal({ service, onClose, onSelectForInquir
             </div>
           </div>
 
-          {/* 5-Step Engineering Workflow */}
+          {/* Workflow Steps */}
           <div>
-            <h3 className="text-sm font-mono uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2">
-              <Zap className="w-4 h-4 text-cyan-400" />
-              Execution & Delivery Workflow
+            <h3 className="text-xs font-mono uppercase tracking-wider text-slate-500 mb-3 font-bold flex items-center gap-1.5">
+              <Zap className="w-3.5 h-3.5 text-cyan-600" />
+              Execution Blueprint
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {service.workflow.map((w, idx) => (
-                <div
-                  key={idx}
-                  className="p-4 rounded-xl bg-[#040813] border border-white/5 relative group hover:border-cyan-500/30 transition-all"
-                >
-                  <span className="font-mono text-xs font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded">
-                    PHASE {w.step}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              {service.workflow.slice(0, 3).map((w, idx) => (
+                <div key={idx} className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
+                  <span className="font-mono text-[10px] font-bold text-cyan-700 bg-cyan-100/60 px-1.5 py-0.5 rounded">
+                    STAGE {w.step}
                   </span>
-                  <h4 className="text-sm font-bold text-white mt-2 mb-1">
+                  <h4 className="text-xs font-bold text-slate-900 mt-1">
                     {w.title}
                   </h4>
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <p className="text-[11px] text-slate-600">
                     {w.desc}
                   </p>
                 </div>
@@ -146,61 +140,50 @@ export default function ServiceDetailModal({ service, onClose, onSelectForInquir
           </div>
 
           {/* Deliverables & Metrics */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-5 rounded-2xl bg-[#040813] border border-cyan-500/20">
-            <div>
-              <h4 className="text-xs font-mono uppercase tracking-wider text-slate-300 mb-3 font-semibold">
-                Guaranteed Deliverables
+          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col sm:flex-row justify-between gap-4">
+            <div className="space-y-1.5">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-slate-500 font-bold">
+                Deliverables Included
               </h4>
-              <ul className="space-y-2">
-                {service.deliverables.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-xs text-slate-300">
-                    <Check className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
+              <ul className="space-y-1 text-xs text-slate-700">
+                {service.deliverables.slice(0, 2).map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-1.5">
+                    <Check className="w-3.5 h-3.5 text-cyan-600" />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="flex flex-col justify-between border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-6">
-              <div>
-                <h4 className="text-xs font-mono uppercase tracking-wider text-cyan-400 mb-2 font-semibold">
-                  Proven Enterprise Benchmark
-                </h4>
-                <p className="text-sm font-semibold text-slate-200">
-                  {service.metrics}
-                </p>
-              </div>
-
-              <div className="mt-4 pt-3 border-t border-white/10 text-xs text-slate-400">
-                Backed by Nezvo Infotech's 99.99% Reliability Guarantee & Dedicated Solution Architect.
-              </div>
+            <div className="sm:border-l sm:border-slate-200 sm:pl-4 flex flex-col justify-center">
+              <span className="text-[11px] font-mono text-slate-500 font-semibold uppercase">
+                Enterprise Benchmark
+              </span>
+              <span className="text-xs font-bold text-slate-900 mt-0.5">
+                {service.metrics}
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Modal Footer Actions */}
-        <div className="p-6 sm:p-8 bg-[#060b17] border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-xs text-slate-400 text-center sm:text-left">
-            Need customized architectural scoping? We provide an initial technical roadmap free of obligation.
-          </div>
-          <div className="flex items-center gap-3 w-full sm:w-auto">
-            <button
-              onClick={onClose}
-              className="px-5 py-2.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/5 border border-white/10 transition-colors w-full sm:w-auto"
-            >
-              Close
-            </button>
-            <button
-              onClick={() => {
-                onSelectForInquiry(service.title);
-                onClose();
-              }}
-              className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-xs tracking-wide shadow-lg shadow-cyan-500/25 transition-all w-full sm:w-auto"
-            >
-              <span>Request Consultation For This Service</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
+        {/* Modal Bottom Actions */}
+        <div className="p-4 sm:p-5 bg-slate-50 border-t border-slate-100 flex items-center justify-between gap-3">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 rounded-full text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-200/60 transition-colors"
+          >
+            Close
+          </button>
+          <button
+            onClick={() => {
+              onSelectForInquiry(service.title);
+              onClose();
+            }}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-cyan-600 via-sky-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold text-xs tracking-wide shadow-md shadow-cyan-600/20 transition-all"
+          >
+            <span>Consult on this Service</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
       </div>
     </div>

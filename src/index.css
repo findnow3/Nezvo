@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
-  background-color: #030712;
-  color: #f8fafc;
+  background-color: #f8fafc;
+  color: #0f172a;
   overflow-x: clip;
   -webkit-overflow-scrolling: touch;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
@@ -34,82 +34,71 @@ div {
   text-decoration-style: none !important;
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Refined Light Theme */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #030712;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8;
+  background: #0284c7;
 }
 
-/* Glassmorphism & Cyber Styling */
+/* Light Theme Cards & Surfaces */
 .glass-panel {
-  background: rgba(8, 14, 30, 0.75);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
 }
 
 .glass-card {
-  background: linear-gradient(135deg, rgba(13, 22, 46, 0.6) 0%, rgba(8, 14, 30, 0.8) 100%);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.05);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
-  border-color: rgba(56, 189, 248, 0.35);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px -10px rgba(56, 189, 248, 0.2);
+  border-color: rgba(14, 165, 233, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px -8px rgba(14, 165, 233, 0.12);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #818cf8 100%);
+  background: linear-gradient(135deg, #0f172a 0%, #0369a1 50%, #312e81 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-cyan {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gradient-text-purple {
-  background: linear-gradient(135deg, #c084fc 0%, #a855f7 50%, #38bdf8 100%);
+  background: linear-gradient(135deg, #7c3aed 0%, #4338ca 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.gradient-text-emerald {
-  background: linear-gradient(135deg, #34d399 0%, #10b981 50%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.bg-cyber-grid {
+.bg-light-grid {
   background-image: 
-    linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
+    linear-gradient(to right, rgba(148, 163, 184, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+  background-size: 36px 36px;
 }
 
-.bg-radial-glow {
-  background: radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.15), transparent 70%);
-}
-
-.scanline {
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 0) 50%,
-    rgba(0, 255, 255, 0.03) 50%,
-    rgba(0, 255, 255, 0.03)
-  );
-  background-size: 100% 4px;
+.bg-light-glow {
+  background: radial-gradient(circle at 50% 30%, rgba(14, 165, 233, 0.09), transparent 70%);
 }
