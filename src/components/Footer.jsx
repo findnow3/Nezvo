@@ -1,6 +1,6 @@
 import React from 'react';
-import { ArrowUp, Github, Linkedin, Twitter, Shield, Sparkles } from 'lucide-react';
-import { SERVICES } from '../data/websiteData';
+import { ArrowUp, Github, Linkedin, Twitter, Sparkles, MapPin, Mail, Phone } from 'lucide-react';
+import { SERVICES, CONTACT_INFO } from '../data/websiteData';
 
 export default function Footer({ onOpenContact }) {
   const scrollToTop = () => {
@@ -8,24 +8,24 @@ export default function Footer({ onOpenContact }) {
   };
 
   return (
-    <footer className="bg-slate-950 text-slate-400 pt-14 pb-10 border-t border-slate-800 relative">
+    <footer className="bg-slate-950 text-slate-400 pt-12 pb-8 border-t border-slate-800 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-slate-800">
           {/* Brand Col */}
-          <div className="lg:col-span-2 space-y-3.5">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 via-sky-500 to-blue-600 p-[1.5px] shadow-sm">
-                <div className="w-full h-full bg-slate-950 rounded-[6px] flex items-center justify-center">
-                  <span className="font-mono font-black text-cyan-400 text-sm">N</span>
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 p-[1.5px]">
+                <div className="w-full h-full bg-slate-950 rounded-[5px] flex items-center justify-center">
+                  <span className="font-mono font-black text-cyan-400 text-xs">N</span>
                 </div>
               </div>
-              <span className="text-lg font-bold tracking-tight text-white">
+              <span className="text-base font-bold tracking-tight text-white">
                 NEZVO <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-400 font-extrabold">INFOTECH</span>
               </span>
             </div>
 
-            <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-              Next-generation enterprise software, cloud infrastructure, and autonomous AI systems built for planetary scale and mission-critical reliability.
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Software engineering, mobile app development, and cloud solutions built with modern technology and clean architecture.
             </p>
 
             <div className="flex items-center gap-2 pt-1">
@@ -33,7 +33,7 @@ export default function Footer({ onOpenContact }) {
                 href="https://github.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/40 transition-colors"
+                className="w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 transition-colors"
                 aria-label="GitHub"
               >
                 <Github className="w-3.5 h-3.5" />
@@ -42,7 +42,7 @@ export default function Footer({ onOpenContact }) {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/40 transition-colors"
+                className="w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-3.5 h-3.5" />
@@ -51,7 +51,7 @@ export default function Footer({ onOpenContact }) {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/40 transition-colors"
+                className="w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 transition-colors"
                 aria-label="Twitter"
               >
                 <Twitter className="w-3.5 h-3.5" />
@@ -60,11 +60,11 @@ export default function Footer({ onOpenContact }) {
           </div>
 
           {/* Core Services */}
-          <div className="space-y-2.5">
-            <h4 className="text-xs font-mono uppercase tracking-widest text-slate-200 font-bold">
-              Capabilities
+          <div className="space-y-2">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-slate-200 font-bold">
+              Services
             </h4>
-            <ul className="space-y-1.5 text-xs">
+            <ul className="space-y-1 text-xs">
               {SERVICES.map((s) => (
                 <li key={s.id}>
                   <a href="#services" className="hover:text-cyan-400 transition-colors">
@@ -75,52 +75,48 @@ export default function Footer({ onOpenContact }) {
             </ul>
           </div>
 
-          {/* Company */}
-          <div className="space-y-2.5">
-            <h4 className="text-xs font-mono uppercase tracking-widest text-slate-200 font-bold">
-              Organization
+          {/* Quick Links */}
+          <div className="space-y-2">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-slate-200 font-bold">
+              Company
             </h4>
-            <ul className="space-y-1.5 text-xs">
-              <li><a href="#about" className="hover:text-cyan-400 transition-colors">10+ Years History</a></li>
-              <li><a href="#about" className="hover:text-cyan-400 transition-colors">120+ Shipped Systems</a></li>
-              <li><a href="#about" className="hover:text-cyan-400 transition-colors">SOC-2 & ISO Compliance</a></li>
-              <li><a href="#estimator" className="hover:text-cyan-400 transition-colors">Project Estimator</a></li>
+            <ul className="space-y-1 text-xs">
+              <li><a href="#hero" className="hover:text-cyan-400 transition-colors">About Nezvo</a></li>
+              <li><a href="#about" className="hover:text-cyan-400 transition-colors">Our Work Ethic</a></li>
+              <li><a href="#estimator" className="hover:text-cyan-400 transition-colors">Timeline Estimator</a></li>
+              <li><a href="#contact" className="hover:text-cyan-400 transition-colors">Contact Us</a></li>
             </ul>
           </div>
 
-          {/* Contact Direct */}
-          <div className="space-y-2.5">
-            <h4 className="text-xs font-mono uppercase tracking-widest text-slate-200 font-bold">
-              Contact
+          {/* Contact Details */}
+          <div className="space-y-2">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-slate-200 font-bold">
+              Office
             </h4>
             <div className="space-y-1.5 text-xs">
-              <p className="text-slate-300 font-medium">Inquiries:</p>
-              <p className="text-cyan-400 font-mono text-[11px]">consulting@nezvoinfotech.com</p>
-              <p className="text-slate-300 font-medium pt-1">Direct Hotline:</p>
-              <p className="text-slate-400 font-mono text-[11px]">+1 (800) 842-NEZVO</p>
-              <button
-                onClick={onOpenContact}
-                className="mt-2.5 px-3.5 py-1.5 rounded-xl bg-cyan-950/70 border border-cyan-500/30 text-cyan-300 hover:text-white hover:bg-cyan-600 font-semibold text-xs transition-all w-full flex items-center justify-center gap-1.5"
-              >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Book Consultation</span>
-              </button>
+              <div className="flex items-start gap-1.5 text-slate-400">
+                <MapPin className="w-3.5 h-3.5 text-cyan-500 shrink-0 mt-0.5" />
+                <span>{CONTACT_INFO.office.address}</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-slate-300">
+                <Mail className="w-3.5 h-3.5 text-cyan-500 shrink-0" />
+                <span className="font-mono text-[11px] text-cyan-400">{CONTACT_INFO.office.email}</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-slate-300">
+                <Phone className="w-3.5 h-3.5 text-cyan-500 shrink-0" />
+                <span className="font-mono text-[11px]">{CONTACT_INFO.office.phone}</span>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
-          <div className="flex items-center gap-2">
-            <span>© {new Date().getFullYear()} Nezvo Infotech. All Rights Reserved.</span>
-            <span>•</span>
-            <span className="flex items-center gap-1 text-slate-400">
-              <Shield className="w-3 h-3 text-emerald-400" />
-              SOC-2 Type II Certified
-            </span>
+          <div>
+            © {new Date().getFullYear()} Nezvo Infotech. All Rights Reserved.
           </div>
 
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-4">
             <a href="#hero" className="hover:text-slate-300">Privacy Policy</a>
             <a href="#hero" className="hover:text-slate-300">Terms of Service</a>
             <button
